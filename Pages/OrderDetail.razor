@@ -1,8 +1,8 @@
-@page "/myorders/{orderId}"
+@page "/myorders/{OrderId:int}"
 @inject NavigationManager NavigationManager
 @inject HttpClient HttpClient
 
-<div class="tob-bar">
+<div class="top-bar">
   <a href="" class="logo">
     <img src="img/logo.svg" alt="" />
   </a>
@@ -14,7 +14,7 @@
 
   <NavLink href="myorders" class="nav-tab">
     <img src="img/bike.svg" alt="" />
-    <div>myorders Orders</div>
+    <div>My Orders</div>
   </NavLink>
 </div>
 
@@ -27,11 +27,11 @@
   else if (orderWithStatus == null)
   {
     <div class="track-order">
-      <div class="tract-order-title">
+      <div class="track-order-title">
         <h2>
           <text>Loading...</text>
         </h2>
-        <p class="ml-quto mb-0">
+        <p class="ml-auto mb-0">
           ...
         </p>
       </div>
@@ -51,7 +51,16 @@
 
       <div class="track-order-body">
         <div class="track-order-details">
-          @foreach (var pizza in rderWithStatus.Order.Pizzas)
+          @foreach (var pizza in orderWithStatus.Order.Pizzas)
+          {
+            <p>
+              <strong>
+                @(pizza.Size)"
+                @pizza.Special.Name
+                ($@pizza.GetFormattedTotalPrice())
+              </strong>
+            </p>
+          }
         </div>
       </div>
     </div>

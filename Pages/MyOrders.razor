@@ -1,0 +1,70 @@
+@page "/myorders"
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+
+<div class="top-bar">
+  <a href="" class="logo">
+    <img src="img/logo.svg" alt="" />
+  </a>
+
+  <a href="" class="nav-tab">
+    <img src="img/pizza-slice.svg" alt="" />
+    <div>Get Pizza</div>
+  </a>
+
+  <a href="" class="nav-tab active">
+    <img src="img/bike.svg" alt="">
+    <div>My Orders</div>
+  </a>
+</div>
+
+<div class="main">
+  @if (orderWithStatus == null)
+  {
+    <text>Loading...</text>
+  }
+  else if (!orderWithStatus.Any())
+  {
+    <h2>No orders placed</h2>
+    <a class="btn btn-success" href="">Order some pizza</a>
+  }
+  else
+  {
+    <div class="list-group orders-list">
+      @foreach (var item in orderWithStatus)
+      {
+        <div class="list-group-item">
+          <div class="col">
+            <h5>@item.Order.CreatedTime.ToLongDateString()</h5>
+            Items:
+            <strong>@item.Order.Pizzas.Count()</strong>;
+            Total price:
+            <strong>$@item.Order.GetFormattedTotalPrice()</strong>
+          </div>
+          <div class="col">
+            Status: <strong>@item.StatusText</strong>
+          </div>
+
+
+          <div class=@($"col flex-grow-0 { (item.StatusText != "Delivered" ? "" : "invisible") }")>
+            <a href="myorders/" class="btn btn-success">
+              Track &gt;
+            </a>
+          </div>
+
+          
+        </div>
+      }
+    </div>
+  }
+</div>
+
+
+@code {
+  List<OrderWithStatus> orderWithStatus = new();
+
+  protected override async Task OnParametersSetAsync()
+  {
+    orderWithStatus = await HttpClient.GetFromJsonAsync<List<OrderWithStatus>>($"{NavigationManager.BaseUri}orders");
+  }
+}

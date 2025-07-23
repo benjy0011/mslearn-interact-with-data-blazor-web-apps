@@ -1,22 +1,8 @@
 @page "/myorders"
+@layout MainLayout
 @inject HttpClient HttpClient
 @inject NavigationManager NavigationManager
 
-<div class="top-bar">
-  <a href="" class="logo">
-    <img src="img/logo.svg" alt="" />
-  </a>
-
-  <a href="" class="nav-tab">
-    <img src="img/pizza-slice.svg" alt="" />
-    <div>Get Pizza</div>
-  </a>
-
-  <a href="" class="nav-tab active">
-    <img src="img/bike.svg" alt="">
-    <div>My Orders</div>
-  </a>
-</div>
 
 <div class="main">
   @if (orderWithStatus == null)

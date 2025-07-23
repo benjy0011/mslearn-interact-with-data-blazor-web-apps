@@ -1,22 +1,8 @@
 @page "/myorders/{orderId:int}"
+@layout MainLayout
 @inject NavigationManager NavigationManager
 @inject HttpClient HttpClient
 
-<div class="top-bar">
-  <a href="" class="logo">
-    <img src="img/logo.svg" alt="" />
-  </a>
-
-  <NavLink class="nav-tab" Match="NavLinkMatch.All" href="">
-    <img src="img/pizza-slice.svg" alt="" />
-    <div>Get Pizza</div>
-  </NavLink>
-
-  <NavLink href="myorders" class="nav-tab">
-    <img src="img/bike.svg" alt="" />
-    <div>My Orders</div>
-  </NavLink>
-</div>
 
 <div class="main">
   @if (invalidOrder)

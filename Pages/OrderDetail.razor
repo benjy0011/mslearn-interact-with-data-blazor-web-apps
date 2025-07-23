@@ -1,4 +1,4 @@
-@page "/myorders/{OrderId:int}"
+@page "/myorders/{orderId:int}"
 @inject NavigationManager NavigationManager
 @inject HttpClient HttpClient
 
@@ -7,7 +7,7 @@
     <img src="img/logo.svg" alt="" />
   </a>
 
-  <NavLink class="nav-tab" Match="NavLinkMatch.All">
+  <NavLink class="nav-tab" Match="NavLinkMatch.All" href="">
     <img src="img/pizza-slice.svg" alt="" />
     <div>Get Pizza</div>
   </NavLink>
